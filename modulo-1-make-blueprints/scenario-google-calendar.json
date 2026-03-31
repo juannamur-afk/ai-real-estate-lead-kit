@@ -1,0 +1,122 @@
+{
+  "name": "Claude AI → Google Calendar → Confirmación WhatsApp",
+  "description": "Cuando Claude confirma una visita, extrae fecha y hora, crea evento en Google Calendar y envía confirmación al cliente por WhatsApp.",
+  "version": "1.0.0",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": "{{WEBHOOK_CALENDAR_ID}}",
+        "maxResults": 1
+      },
+      "metadata": {
+        "notes": "Este webhook recibe el payload cuando el escenario principal detecta que Claude confirmó una visita. Payload esperado: { customer_phone, customer_name, visit_date, visit_time, property_address }"
+      }
+    },
+    {
+      "id": 2,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {
+        "name": "event_title",
+        "scope": "roundtrip",
+        "type": "text",
+        "value": "Visita - {{1.body.customer_name}} - {{1.body.property_address}}"
+      }
+    },
+    {
+      "id": 3,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {
+        "name": "event_start",
+        "scope": "roundtrip",
+        "type": "text",
+        "value": "{{1.body.visit_date}}T{{1.body.visit_time}}:00"
+      }
+    },
+    {
+      "id": 4,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {
+        "name": "event_end",
+        "scope": "roundtrip",
+        "type": "text",
+        "value": "{{addHours(parseDate(event_start); 1)}}"
+      }
+    },
+    {
+      "id": 5,
+      "module": "google-calendar:createEvent",
+      "version": 1,
+      "parameters": {
+        "calendarId": "{{GOOGLE_CALENDAR_ID}}",
+        "summary": "{{event_title}}",
+        "start": {
+          "dateTime": "{{event_start}}",
+          "timeZone": "America/Mexico_City"
+        },
+        "end": {
+          "dateTime": "{{event_end}}",
+          "timeZone": "America/Mexico_City"
+        },
+        "description": "Cliente: {{1.body.customer_name}}\nTeléfono: {{1.body.customer_phone}}\nPropiedad: {{1.body.property_address}}\n\nAgendado automáticamente por el agente IA.",
+        "attendees": [],
+        "reminders": {
+          "useDefault": false,
+          "overrides": [
+            {"method": "popup", "minutes": 60},
+            {"method": "popup", "minutes": 15}
+          ]
+        }
+      }
+    },
+    {
+      "id": 6,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/{{WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "method": "POST",
+        "headers": [
+          {"name": "Authorization", "value": "Bearer {{WHATSAPP_ACCESS_TOKEN}}"},
+          {"name": "Content-Type", "value": "application/json"}
+        ],
+        "bodyType": "raw",
+        "contentType": "application/json",
+        "body": "{\"messaging_product\":\"whatsapp\",\"to\":\"{{1.body.customer_phone}}\",\"type\":\"text\",\"text\":{\"body\":\"✅ ¡Visita confirmada!\\n\\n📅 Fecha: {{1.body.visit_date}}\\n🕐 Hora: {{1.body.visit_time}}\\n📍 Dirección: {{1.body.property_address}}\\n\\nTe esperamos. Si necesitas reagendar, escríbenos con anticipación.\"}}"
+      }
+    },
+    {
+      "id": 7,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/{{WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "method": "POST",
+        "headers": [
+          {"name": "Authorization", "value": "Bearer {{WHATSAPP_ACCESS_TOKEN}}"},
+          {"name": "Content-Type", "value": "application/json"}
+        ],
+        "bodyType": "raw",
+        "contentType": "application/json",
+        "body": "{\"messaging_product\":\"whatsapp\",\"to\":\"{{ADVISOR_PHONE_MX}}\",\"type\":\"text\",\"text\":{\"body\":\"📅 VISITA AGENDADA\\n\\nCliente: {{1.body.customer_name}}\\nTel: {{1.body.customer_phone}}\\nFecha: {{1.body.visit_date}} {{1.body.visit_time}}\\nPropiedad: {{1.body.property_address}}\\n\\nEvento creado en Google Calendar.\"}}"
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "setup_variables": {
+      "WEBHOOK_CALENDAR_ID": "Crear webhook separado en Make.com para este escenario",
+      "GOOGLE_CALENDAR_ID": "ID del calendario del asesor (formato: email@gmail.com o ID específico)",
+      "WHATSAPP_PHONE_NUMBER_ID": "Mismo que en el escenario principal",
+      "WHATSAPP_ACCESS_TOKEN": "Mismo que en el escenario principal",
+      "ADVISOR_PHONE_MX": "Número del asesor: 521XXXXXXXXXX"
+    },
+    "integration_notes": "Para conectar este escenario con el principal: en el escenario de WhatsApp, después de que Claude responda con 'visita confirmada', agregar un módulo HTTP que llame al webhook de este escenario con los datos extraídos por Claude (fecha, hora, dirección, nombre del cliente)."
+  }
+}
