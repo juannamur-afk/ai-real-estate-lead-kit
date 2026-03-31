@@ -91,5 +91,7 @@ Con el **AI Real Estate Lead Kit completo** tienes:
 
 **→ [LINK DE GUMROAD]** | $67 USD — acceso inmediato
 
+¿Necesitas algo más avanzado — integrado con tu CRM o tu MLS propio? Escríbenos a **juannamur@gmail.com** y lo construimos juntos.
+
 ---
 *AI Real Estate Lead Kit | Namur CPA*

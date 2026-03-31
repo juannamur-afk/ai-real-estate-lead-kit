@@ -89,6 +89,12 @@ El costo del kit: $67 USD, un solo pago.
 
 ---
 
+### ¿Necesitas un agente 100% personalizado?
+
+Si tu agencia necesita integración con tu CRM, tu MLS propio o flujos más complejos, podemos construirlo contigo. Escríbenos a **juannamur@gmail.com** con el asunto "Agente Custom".
+
+---
+
 ## Configuración en Gumroad
 
 **Tipo de producto:** Digital (archivos descargables)

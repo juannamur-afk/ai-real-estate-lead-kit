@@ -101,4 +101,14 @@ PROPIEDADES DISPONIBLES:
 
 ---
 
+---
+
+## ¿Quieres un agente 100% personalizado para tu agencia?
+
+Este kit te da el sistema base. Si necesitas algo más avanzado — integrado con tu CRM, tu MLS, tu base de datos de propiedades, o con flujos de trabajo específicos de tu operación — podemos construirlo contigo.
+
+**Escríbenos a juannamur@gmail.com** con el asunto "Agente Custom" y cuéntanos qué necesitas.
+
+---
+
 *AI Real Estate Lead Kit v1.0 — Namur CPA*
