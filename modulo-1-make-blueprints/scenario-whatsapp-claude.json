@@ -1,0 +1,151 @@
+{
+  "name": "WhatsApp Lead → Claude AI → Respuesta Automática",
+  "description": "Recibe mensajes de WhatsApp Business, los procesa con Claude AI y envía respuesta automática. Incluye escalación a asesor humano.",
+  "version": "1.0.0",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": "{{WEBHOOK_ID}}",
+        "maxResults": 1
+      }
+    },
+    {
+      "id": 2,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {
+        "name": "customer_message",
+        "scope": "roundtrip",
+        "type": "text",
+        "value": "{{1.body.entry[].changes[].value.messages[].text.body}}"
+      }
+    },
+    {
+      "id": 3,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {
+        "name": "customer_phone",
+        "scope": "roundtrip",
+        "type": "text",
+        "value": "{{1.body.entry[].changes[].value.messages[].from}}"
+      }
+    },
+    {
+      "id": 4,
+      "module": "anthropic:createMessage",
+      "version": 1,
+      "parameters": {
+        "model": "claude-opus-4-5",
+        "max_tokens": 500,
+        "system": "{{SYSTEM_PROMPT_ANDREA_PEDRO_O_SOFIA}}",
+        "messages": [
+          {
+            "role": "user",
+            "content": "{{customer_message}}"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {
+        "name": "ai_response",
+        "scope": "roundtrip",
+        "type": "text",
+        "value": "{{4.content[].text}}"
+      }
+    },
+    {
+      "id": 6,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "routes": [
+        {
+          "label": "Respuesta Normal AI",
+          "filter": {
+            "conditions": [
+              [{"a": "{{ai_response}}", "b": "Necesita asesor humano", "o": "text:notcontain"}]
+            ]
+          },
+          "flow": [
+            {
+              "id": 7,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": {
+                "url": "https://graph.facebook.com/v18.0/{{WHATSAPP_PHONE_NUMBER_ID}}/messages",
+                "method": "POST",
+                "headers": [
+                  {"name": "Authorization", "value": "Bearer {{WHATSAPP_ACCESS_TOKEN}}"},
+                  {"name": "Content-Type", "value": "application/json"}
+                ],
+                "bodyType": "raw",
+                "contentType": "application/json",
+                "body": "{\"messaging_product\":\"whatsapp\",\"to\":\"{{customer_phone}}\",\"type\":\"text\",\"text\":{\"body\":\"{{ai_response}}\"}}"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Escalación a Asesor Humano",
+          "filter": {
+            "conditions": [
+              [{"a": "{{ai_response}}", "b": "Necesita asesor humano", "o": "text:contain"}]
+            ]
+          },
+          "flow": [
+            {
+              "id": 8,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": {
+                "url": "https://graph.facebook.com/v18.0/{{WHATSAPP_PHONE_NUMBER_ID}}/messages",
+                "method": "POST",
+                "headers": [
+                  {"name": "Authorization", "value": "Bearer {{WHATSAPP_ACCESS_TOKEN}}"},
+                  {"name": "Content-Type", "value": "application/json"}
+                ],
+                "bodyType": "raw",
+                "contentType": "application/json",
+                "body": "{\"messaging_product\":\"whatsapp\",\"to\":\"{{ADVISOR_PHONE_MX}}\",\"type\":\"text\",\"text\":{\"body\":\"🔔 LEAD REQUIERE ATENCIÓN\\n\\nCliente: {{customer_phone}}\\nMensaje: {{customer_message}}\\n\\nRazón: {{ai_response}}\"}}"
+              }
+            },
+            {
+              "id": 9,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": {
+                "url": "https://graph.facebook.com/v18.0/{{WHATSAPP_PHONE_NUMBER_ID}}/messages",
+                "method": "POST",
+                "headers": [
+                  {"name": "Authorization", "value": "Bearer {{WHATSAPP_ACCESS_TOKEN}}"},
+                  {"name": "Content-Type", "value": "application/json"}
+                ],
+                "bodyType": "raw",
+                "contentType": "application/json",
+                "body": "{\"messaging_product\":\"whatsapp\",\"to\":\"{{customer_phone}}\",\"type\":\"text\",\"text\":{\"body\":\"Gracias por tu mensaje. Un asesor de nuestro equipo te contactará en los próximos minutos para atenderte personalmente 😊\"}}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "setup_variables": {
+      "WEBHOOK_ID": "Se genera automáticamente al crear el webhook en Make.com",
+      "SYSTEM_PROMPT_ANDREA_PEDRO_O_SOFIA": "Copia el contenido de modulo-2-prompts/system-prompt-andrea.md",
+      "WHATSAPP_PHONE_NUMBER_ID": "Meta Business > WhatsApp > Configuración > Phone Number ID",
+      "WHATSAPP_ACCESS_TOKEN": "Token de acceso de tu App de Meta Business",
+      "ADVISOR_PHONE_MX": "Número del asesor humano: 521XXXXXXXXXX"
+    }
+  }
+}
