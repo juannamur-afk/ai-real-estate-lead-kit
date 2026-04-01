@@ -38,12 +38,47 @@ Tamaño: 1280x720px
 
 ---
 
-## Pendiente de generar
+## Thumbnail guardado en Canva ✅
+Editar: https://www.canva.com/d/v3CoJEL4Kw9hxd6
 
-- [ ] Post "Tu agencia 24/7 con IA"
-- [ ] Post "En un fin de semana lo tienes funcionando"
-- [ ] Post CTA directo con precio
-- [ ] Story swipe-up al free hook (3 variantes)
-- [ ] 5 posts adicionales completando los 10 prometidos
+---
 
-*Dile a Juan cuál thumbnail y posts le gustan para guardarlos en Canva.*
+## Post Instagram — Tu agencia 24/7 con IA
+
+| Opción | Preview | Editar |
+|---|---|---|
+| A | https://design.canva.ai/h_uX86sPuVh_b7j | https://www.canva.com/d/IcZ6z-voPUAly0g |
+| B | https://design.canva.ai/tKgKSenh4lOEkyO | https://www.canva.com/d/7AOobmu6HJlGdFQ |
+| C | https://design.canva.ai/VOK67DUzozhaphO | https://www.canva.com/d/MKTnvCrf6TXZmKx |
+| D | https://design.canva.ai/9XhHJ1yNIZD_dBb | https://www.canva.com/d/bTxESs7yiDr3eVd |
+
+---
+
+## Post Instagram — $67 vs valor real
+
+| Opción | Preview | Editar |
+|---|---|---|
+| A | https://design.canva.ai/VB_VYJstWHK7_Vv | https://www.canva.com/d/aF3erOU9NVAgA11 |
+| B | https://design.canva.ai/DLVXyWfFcx4-CxJ | https://www.canva.com/d/IKkFfbuj1U9ukq0 |
+| C | https://design.canva.ai/wrubJBKm1-5baTY | https://www.canva.com/d/IFKKpqdpmpN9Isq |
+| D | https://design.canva.ai/VlvPsBpykBb6Gdz | https://www.canva.com/d/D2beVWVtURhPe2u |
+
+---
+
+## Story — Descarga gratis (Free Hook)
+
+| Opción | Preview | Editar |
+|---|---|---|
+| A | https://design.canva.ai/fI8q4MwF4Ms7SYw | https://www.canva.com/d/arih4nmkX9rtrAV |
+| B | https://design.canva.ai/nMaC8qUha0mixRM | https://www.canva.com/d/_jdk0PCvMfpKG7Y |
+| C | https://design.canva.ai/67eny1xZ9ozrGhi | https://www.canva.com/d/tNk1Ig2624Pl-bP |
+| D | https://design.canva.ai/lMRinfOVT3XXuxK | https://www.canva.com/d/_5K95JMvGGNdort |
+
+---
+
+## Pendiente
+- [ ] Post "Un fin de semana" (timeout en generación — regenerar)
+- [ ] 3 posts adicionales para llegar a 10
+- [ ] 2 stories adicionales para llegar a 3
+
+*Dile a Juan cuáles posts y stories le gustan para guardarlos en tu cuenta de Canva.*
