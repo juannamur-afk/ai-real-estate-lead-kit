@@ -8,12 +8,12 @@
 | Herramienta | Costo | Para qué |
 |---|---|---|
 | Make.com | Gratis (hasta 1,000 ops/mes) | Automatización central |
-| Claude API | ~$5-20/mes | El cerebro del agente |
+| Claude API | ~$0.50-3/mes | El cerebro del agente |
 | WhatsApp Business API | Gratis (1,000 conv/mes) | Canal de comunicación |
 | Meta Business Manager | Gratis | Para activar WhatsApp API |
 | Google Calendar | Gratis | Agendar visitas |
 
-**Costo total para arrancar: $5-20 USD/mes**
+**Costo total para arrancar: ~$1-5 USD/mes**
 
 ---
 
@@ -86,6 +86,19 @@ PROPIEDADES DISPONIBLES:
 - [ ] Webhook conectado y verificado
 - [ ] Escenario activo
 - [ ] Prueba exitosa ✓
+
+---
+
+## Control de costos API
+
+El blueprint ya usa `claude-haiku-4-5` con `max_tokens: 150` — el modelo más económico y más que suficiente para respuestas de 2-3 oraciones.
+
+**Para mantener costos bajos:**
+- **Portfolio**: pega máx. 5 propiedades en el system prompt, 2 líneas cada una. El portfolio completo puede multiplicar x5 el costo por mensaje.
+- **No aumentes max_tokens**: 150 tokens = ~3 oraciones largas. Más no mejora las respuestas.
+- **Si escalas a >500 leads/mes**: activa Prompt Caching en Anthropic (beta) — reduce 90% el costo del system prompt en conversaciones repetidas.
+
+**Costo estimado a 1,000 mensajes/mes con esta configuración: < $0.50 USD**
 
 ---
 

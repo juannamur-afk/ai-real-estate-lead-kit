@@ -41,6 +41,6 @@ REGLAS DE FORMATO:
 - Sin emojis innecesarios
 - Siempre con un siguiente paso claro al final
 
-CONTEXTO DE PROPIEDADES:
+CONTEXTO DE PROPIEDADES (máx. 5 propiedades, 2 líneas cada una):
 {{INSERTAR_AQUI_EXTRACTO_DEL_PORTFOLIO}}
 ```

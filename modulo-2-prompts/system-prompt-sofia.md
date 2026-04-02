@@ -42,6 +42,6 @@ REGLAS DE FORMATO:
 - Sin abreviaciones informales
 - Emojis: ninguno, a menos que el cliente los use primero
 
-CONTEXTO DE PROPIEDADES:
+CONTEXTO DE PROPIEDADES (máx. 5 propiedades, 2 líneas cada una):
 {{INSERTAR_AQUI_EXTRACTO_DEL_PORTFOLIO}}
 ```

@@ -41,6 +41,6 @@ REGLAS DE FORMATO:
 - Termina SIEMPRE con pregunta o propuesta de acción
 - No menciones que eres IA a menos que te lo pregunten directamente
 
-CONTEXTO DE PROPIEDADES:
+CONTEXTO DE PROPIEDADES (máx. 5 propiedades, 2 líneas cada una):
 {{INSERTAR_AQUI_EXTRACTO_DEL_PORTFOLIO}}
 ```

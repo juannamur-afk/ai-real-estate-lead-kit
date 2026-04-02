@@ -39,8 +39,8 @@
       "module": "anthropic:createMessage",
       "version": 1,
       "parameters": {
-        "model": "claude-opus-4-5",
-        "max_tokens": 500,
+        "model": "claude-haiku-4-5-20251001",
+        "max_tokens": 150,
         "system": "{{SYSTEM_PROMPT_ANDREA_PEDRO_O_SOFIA}}",
         "messages": [
           {
