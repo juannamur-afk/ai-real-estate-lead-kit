@@ -7,7 +7,7 @@
 ## ✅ Completado
 
 ### Producto
-- [x] `/free-hook/el-prompt-maestro-whatsapp.md` — Free hook con system prompt + 5 plantillas
+- [x] `/free-hook/calculador-perdida-leads.html` — Free hook: calculador interactivo de pérdida por tiempo de respuesta
 - [x] `/modulo-1-make-blueprints/scenario-whatsapp-claude.json` — Blueprint Make.com completo
 - [x] `/modulo-1-make-blueprints/scenario-google-calendar.json` — Blueprint Google Calendar
 - [x] `/modulo-2-prompts/system-prompt-andrea.md` — Persona empática (rentas)

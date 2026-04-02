@@ -42,10 +42,10 @@ Si la respuesta es "más de una hora" — o "depende de qué tan ocupados estemo
 - 3 diseños de stories
 - Guía de marca con paleta de colores y tipografías
 
-**🎁 BONUS: El Prompt Maestro (gratis)**
-- El system prompt exacto para usar en Claude.ai o ChatGPT hoy mismo
-- 5 plantillas de respuesta para las situaciones más comunes
-- No necesitas configurar nada — úsalo ahora mismo
+**🎁 BONUS: Calculador de Pérdida por Tiempo de Respuesta (gratis)**
+- Ingresa los datos de tu agencia y calcula exactamente cuánto pierdes al mes por responder tarde
+- Basado en el dato de InsideSales.com: 78% de leads va al primero que responde
+- Abre en cualquier navegador, sin instalar nada
 
 ---
 
